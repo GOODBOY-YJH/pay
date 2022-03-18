@@ -1,5 +1,6 @@
 package com.imooc.pay.service.impl;
 
+import com.lly835.bestpay.enums.BestPayTypeEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PayServiceImplTest {
     @Test
     public void create() {
         //  new BigDecimal() 不要用这种方式
-        payService.create("83675198350178", BigDecimal.valueOf(0.01));
+        payService.create("836751983508", BigDecimal.valueOf(0.01), BestPayTypeEnum.WXPAY_NATIVE);
 
     }
 }
