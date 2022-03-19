@@ -1,7 +1,9 @@
 package com.imooc.pay.dao;
 
 import com.imooc.pay.pojo.PayInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface PayInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface PayInfoMapper {
     int updateByPrimaryKeySelective(PayInfo record);
 
     int updateByPrimaryKey(PayInfo record);
+
+    PayInfo selectByOrderNo(Long orderNo);
 }
