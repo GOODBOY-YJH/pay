@@ -58,6 +58,7 @@ public class PayServiceImpl implements IPayService {
      */
     @Override
     public String  asyncNotity(String notifyData) {
+        System.out.println("asyncNotity notifyData"+notifyData);
         // 1. 签名检验
         PayResponse payResponse = bestPayService.asyncNotify(notifyData);
         log.info("asyncNotity_PayResponse = {}", payResponse);
@@ -80,6 +81,8 @@ public class PayServiceImpl implements IPayService {
             payInfoMapper.updateByPrimaryKeySelective(payInfo);
         }
 
+        //TODO pay发送MQ消息，mall接收MQ消息
+
         if (payResponse.getPayPlatformEnum() == BestPayPlatformEnum.WX){
             // 4.告诉微信不要再通知了
             return "<xml>\n" +
@@ -91,4 +94,11 @@ public class PayServiceImpl implements IPayService {
         }
         throw new RuntimeException("异步通知中错误的支付平台");
     }
+
+    @Override
+    public PayInfo queryByOrderId(String orderId) {
+            return payInfoMapper.selectByOrderNo(Long.parseLong(orderId));
+    }
+
+
 }
